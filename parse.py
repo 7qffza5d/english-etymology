@@ -52,6 +52,6 @@ latin_url = "https://en.wikipedia.org/wiki/Latin_spelling_and_pronunciation"
 welsh_url = "https://en.wikipedia.org/wiki/Welsh_orthography"
 greek_url = "https://en.wikipedia.org/wiki/Greek_orthography"
 
-#extract_ipa_from_wikipedia(latin_url, "Latin", "latin.csv")
+extract_ipa_from_wikipedia(latin_url, "Latin", "latin.csv")
 #extract_ipa_from_wikipedia(welsh_url, "Welsh", "welsh.csv")
-extract_ipa_from_wikipedia(greek_url, "Greek", "greek.csv")
+#extract_ipa_from_wikipedia(greek_url, "Greek", "greek.csv")
