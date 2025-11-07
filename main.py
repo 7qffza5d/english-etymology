@@ -49,7 +49,7 @@ for i in englishWords:
 d = {"Brythonic": welshWords, "Latin": latinWords, "Old English": germanWords, "Old Norse": norseWords,
       "Middle French": frenchWords, "Greek": greekWords}
 languages = ["Brythonic", "Latin", "Old English", "Old Norse", "Middle French", "Greek"]
-languages_ISO_639_3 = ["cym-Latn","lat-Latn","deu-Latn","nor-Latn","fra-Latn","ell-Grek.csv"]
+languages_ISO_639_3 = ["cym-Latn","lat-Latn","deu-Latn","nno-Latn","fra-Latn","ell-Grek"]
 df = pd.DataFrame(data=d, index=englishWords)
 
 import importlib.resources as pkg_resources
@@ -78,16 +78,13 @@ for i in englishWords:
     b = -1
     idx = 0
     for j in df.loc[i]:
-        if idx in [0,1,5]:
-            epi = ep.Epitran(languages_ISO_639_3[idx],custom_map_path=r'd:\work work\englisc\computational linguistics\data\map')
-        else:
-            epi = ep.Epitran(languages_ISO_639_3[idx])
+        epi = ep.Epitran(languages_ISO_639_3[idx])
         transipa = epi.transliterate(j)
         if dst.feature_edit_distance(i,j) < a:
             a = dst.feature_edit_distance(i,j)
             b = idx
         idx += 1
-    closest.append(df.loc(i,languages[b]))
+    closest.append(df.at[i,languages[b]])
 
 df.insert(6,"Epitran-PanPhon estimation",closest)
 df.to_excel("protoresult.xlsx",sheet_name="Sheet1")
