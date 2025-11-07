@@ -9,7 +9,7 @@ from panphon.distance import Distance
 englishWords = []
 
 with open("google-10000-english-no-swears.txt","r") as file:
-    while len(englishWords) < 5:
+    while len(englishWords) < 250:
         line = file.readline()
         if len(line) > 1 or line == 'a' or line == 'i':
             englishWords.append(line)
@@ -71,6 +71,7 @@ if not hasattr(featuretable, "_original_read_bases"):
     featuretable.FeatureTable._read_bases = _fixed_read_bases
 
 closest = []
+closestWord = []
 dst = Distance()
 
 for i in englishWords:
@@ -85,6 +86,8 @@ for i in englishWords:
             b = idx
         idx += 1
     closest.append(df.at[i,languages[b]])
+    closestWord.append(b)
 
-df.insert(6,"Epitran-PanPhon estimation",closest)
+df.insert(6,"Epitran-PanPhon estimated closest word", closestWord)
+df.insert(7,"Epitran-PanPhon estimation",closest)
 df.to_excel("protoresult.xlsx",sheet_name="Sheet1")
