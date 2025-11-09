@@ -17,32 +17,32 @@ with open("google-10000-english-no-swears.txt","r") as file:
 #welsh, latin, german, norwegian, french, greek 
 
 welshWords = []
-translator = Translator(to_lang="cy") #this is the ISO 639-1 code
+translator = Translator(to_lang="cy",from_lang="en") #this is the ISO 639-1 code
 for i in englishWords:
     welshWords.append(translator.translate(i))
 
 latinWords = []
-translator = Translator(to_lang="la")
+translator = Translator(to_lang="la",from_lang="en")
 for i in englishWords:
     latinWords.append(translator.translate(i))
 
 germanWords = []
-translator = Translator(to_lang="de")
+translator = Translator(to_lang="de",from_lang="en")
 for i in englishWords:
     germanWords.append(translator.translate(i))
 
 norseWords = []
-translator = Translator(to_lang="no")
+translator = Translator(to_lang="no",from_lang="en")
 for i in englishWords:
     norseWords.append(translator.translate(i))
 
 frenchWords = []
-translator = Translator(to_lang="fr")
+translator = Translator(to_lang="fr",from_lang="en")
 for i in englishWords:
     frenchWords.append(translator.translate(i))
 
 greekWords = []
-translator = Translator(to_lang="el")
+translator = Translator(to_lang="el",from_lang="en")
 for i in englishWords:
     greekWords.append(translator.translate(i))
 
@@ -70,6 +70,8 @@ if not hasattr(featuretable, "_original_read_bases"):
 
     featuretable.FeatureTable._read_bases = _fixed_read_bases
 
+df.to_csv("protoresultnoclosest.csv",index=False,encoding="UTF-8")
+
 closest = []
 closestWord = []
 dst = Distance()
@@ -90,4 +92,5 @@ for i in englishWords:
 
 df.insert(6,"Epitran-PanPhon estimated closest word", closestWord)
 df.insert(7,"Epitran-PanPhon estimation",closest)
-df.to_excel("protoresult.xlsx",sheet_name="Sheet1")
+df.to_csv("protoresult.csv",index=False,encoding="UTF-8")
+#df.to_excel("protoresult.xlsx",sheet_name="Sheet1") #honestly i don't know how ts work
