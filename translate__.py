@@ -13,18 +13,7 @@ with open("google-10000-english-no-swears.txt","r") as file:
         if len(line) > 1:
             englishWords.append(line)
 
-#welsh, latin, dutch, norwegian, french, greek 
-
-welshWords = []
-translator = Translator(to_lang="cy",from_lang="en") #this is the ISO 639-1 code
-for i in englishWords:
-    str = translator.translate(i)
-    str = str.lower()
-    if(str.find(',') != -1):
-        str = str[:str.find(',')]
-    if(str.find('/') != -1):
-        str = str[:str.find('/')]
-    welshWords.append(str)
+#latin, dutch, norwegian, french
 
 latinWords = []
 translator = Translator(to_lang="la",from_lang="en")
@@ -70,20 +59,9 @@ for i in englishWords:
         str = str[:str.find('/')]
     frenchWords.append(str)
 
-greekWords = []
-translator = Translator(to_lang="el",from_lang="en")
-for i in englishWords:
-    str = translator.translate(i)
-    str = str.lower()
-    if(str.find(',') != -1):
-        str = str[:str.find(',')]
-    if(str.find('/') != -1):
-        str = str[:str.find('/')]
-    greekWords.append(str)
-
-d = {"Brittonic": welshWords, "Latin": latinWords, "Old English": dutchWords, "Old Norse": norseWords,
-      "Middle French": frenchWords, "Greek": greekWords}
-languages = ["Brittonic", "Latin", "Old English", "Old Norse", "Middle French", "Greek"]
+d = {"Latin": latinWords, "Old English": dutchWords, "Old Norse": norseWords,
+      "Middle French": frenchWords}
+languages = ["Latin", "Old English", "Old Norse", "Middle French"]
 df = pd.DataFrame(data=d)
 
 df.to_csv("protoresultnoclosest.csv",encoding="UTF-8")

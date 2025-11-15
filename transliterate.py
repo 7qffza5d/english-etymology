@@ -26,7 +26,7 @@ if not hasattr(featuretable, "_original_read_bases"):
 englishWords = []
 
 with open("google-10000-english-no-swears.txt","r") as file:
-    while len(englishWords) < 236:
+    while len(englishWords) < 250:
         line = file.readline()
         line = line[:-1]
         if len(line) > 1:
@@ -38,8 +38,8 @@ dst = Distance()
 
 df = pd.read_csv("protoresultnoclosest.csv",sep=r'\s*,\s*',engine='python')
 df.index = englishWords
-languages = ["Brittonic", "Latin", "Old English", "Old Norse", "Middle French", "Greek"]
-languages_ISO_639_3 = ["cym-Latn","lat-Latn","nld-Latn","nno-Latn","fra-Latn","ell-Grek"]
+languages = ["Latin", "Old English", "Old Norse", "Middle French"]
+languages_ISO_639_3 = ["lat-Latn","nld-Latn","nno-Latn","fra-Latn"]
 
 blacklist = ['','-']
 
@@ -63,7 +63,7 @@ for i in englishWords:
     closest.append(df.at[i,languages[b]])
     closestWord.append(languages[b])
 
-df.insert(6,"Epitran-PanPhon estimated closest word", closestWord)
-df.insert(7,"Epitran-PanPhon estimation",closest)
+df.insert(5,"Epitran-PanPhon estimated closest word", closestWord)
+df.insert(6,"Epitran-PanPhon estimation",closest)
 
 df.to_csv("protoresult.csv",encoding="UTF-8")
