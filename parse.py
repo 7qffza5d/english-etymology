@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import re
 
+#i don't think this actually works
 def extract_ipa_from_wikipedia(url, lang, outfile):
     print(f"Fetching IPA mappings for {lang}...")
     headers = {"User-Agent": "Mozilla/5.0 (compatible; LinguisticsResearchBot/1.0)"}

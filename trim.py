@@ -1,6 +1,9 @@
 import pandas as pd
 import re
 
+#this is for cleaning up the parsed orthography file
+#again, prob doesnt work
+
 df = pd.read_csv("cym-Latn.csv", encoding="utf-8-sig")
 
 clean_rows = []
